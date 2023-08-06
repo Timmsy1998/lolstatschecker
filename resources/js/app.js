@@ -1,15 +1,25 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes React and other helpers. It's a great starting point while
- * building robust, powerful web applications using React + Laravel.
- */
-
 import './bootstrap';
 
-/**
- * Next, we will create a fresh React component instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import SearchForm from './components/SearchForm';
+import SummonerProfile from './components/SummonerProfile';
 
-import './components/Example';
+const App = () => {
+    // State to hold the summoner data fetched from the backend
+    const [summonerData, setSummonerData] = useState(null);
+
+    // Callback function to handle the summoner data received from the backend
+    const handleSummonerData = (data) => {
+      setSummonerData(data);
+    };
+
+    return (
+      <div>
+        <h1>League of Legends Profile Statistics Checker</h1>
+        <SearchForm onSummonerData={handleSummonerData} />
+        {summonerData && <SummonerProfile summonerData={summonerData} />}
+      </div>
+    );
+  };
+
+  // Render the App component to the root element of the HTML page
+  ReactDOM.render(<App />, document.getElementById('root'));
